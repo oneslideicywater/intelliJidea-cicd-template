@@ -41,7 +41,7 @@ jobs:
         releaseTag: 'v1.0.4'
         githubToken: ${{ secrets.GITHUB_TOKEN }}
         files: |
-           .build/distributions/*
+           ./build/distributions/*
 
         
         
