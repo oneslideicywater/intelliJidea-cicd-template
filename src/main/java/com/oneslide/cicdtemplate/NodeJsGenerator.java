@@ -12,6 +12,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.jar.JarFile;
 
 public class NodeJsGenerator {
 
@@ -28,10 +29,18 @@ public class NodeJsGenerator {
         Arrays.asList(fixList).forEach(f ->{
             try {
                 util.copyPluginResource(String.format("/templates/nodejs/%s",f), Paths.get(projectPath,f));
+
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         });
+        try {
+            JarFile file = new FileUtil().pluginJarFile();
+            FileUtil.copyResourcesToDirectory(file, "templates/maven/.helm", Paths.get(projectPath, ".helm").toString());
+            file.close();
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
         try {
             util.copyPluginResource(String.format("/templates/%s","Jenkinsfile"), Paths.get(projectPath,"Jenkinsfile"));
         } catch (IOException e) {
