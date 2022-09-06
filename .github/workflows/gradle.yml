@@ -38,7 +38,7 @@ jobs:
     #  run: ls build/distributions
     - uses: echapmanFromBunnings/upload-release-assets@1.2
       with:
-        releaseTag: 'v1.0.4'
+        releaseTag: 'v1.0.5'
         githubToken: ${{ secrets.GITHUB_TOKEN }}
         files: |
            ./build/distributions/*
