@@ -24,7 +24,8 @@ public class NodeJsGenerator {
                 "Dockerfile",
                 "Dockerfile-arm64",
                 "nginx.conf.template",
-                "build.sh"
+                "build.sh",
+                ".dockerignore"
         };
         Arrays.asList(fixList).forEach(f ->{
             try {

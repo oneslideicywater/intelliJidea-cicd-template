@@ -15,6 +15,12 @@ public class MyNotifier {
                 .createNotification(content, NotificationType.INFORMATION)
                 .notify(project);
     }
-
+    public static void notifyError(@Nullable Project project,
+                                  String content) {
+        NotificationGroupManager.getInstance()
+                .getNotificationGroup("Custom Notification Group")
+                .createNotification(content, NotificationType.ERROR)
+                .notify(project);
+    }
 }
 

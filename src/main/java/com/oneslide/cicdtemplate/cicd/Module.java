@@ -11,6 +11,8 @@ public class Module {
     public String path;
     public Map<String,String> env;
 
+    public EasyBuild easybuild;
+
     public List<Stage> stages;
 
     public List<ResourceItem> resources;
@@ -84,9 +86,14 @@ public class Module {
             module.stages =new ArrayList<>();
             addStageHelper(module);
             module.stages.add(0, new Stage("build",new String[]{
-                    "mvn clean install"}
+                    "mvn clean install -Dmaven.test.skip=true"}
                     ));
         } else{
+            // stages
+            module.stages =new ArrayList<>();
+            module.stages.add(0, new Stage("build",new String[]{
+                    "mvn clean install -Dmaven.test.skip=true"}
+            ));
             Arrays.asList(modules).forEach(m->{
                 Module mod = new Module();
                 mod.name= m;

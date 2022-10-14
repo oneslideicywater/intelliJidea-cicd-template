@@ -51,5 +51,9 @@
                 text="Generate Pipeline Manifest" description="SDK action example">
             <add-to-group group-id="ToolsMenu" anchor="first"/>
         </action>
+        <action id="com.oneslide.cicdtemplate.EasyBuildAction" class="com.oneslide.cicdtemplate.EasyBuildAction"
+                text="Trigger Pipeline v3 Build" description="trigger remote pipeline build">
+            <add-to-group group-id="ToolsMenu" anchor="first"/>
+        </action>
     </actions>
 </idea-plugin>

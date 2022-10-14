@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "com.oneslide"
-version = "1.0.4"
+version = "3.0.1"
 
 repositories {
     mavenCentral()
@@ -37,7 +37,7 @@ tasks {
     }
 
     patchPluginXml {
-        sinceBuild.set("183.4284.93")
+        sinceBuild.set("203.8084.24")
         untilBuild.set("")
     }
 

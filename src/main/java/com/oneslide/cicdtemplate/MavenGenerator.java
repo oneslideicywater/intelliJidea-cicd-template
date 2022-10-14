@@ -64,7 +64,8 @@ public class MavenGenerator {
         FileUtil util =new FileUtil();
         String[] fixList = new String[]{
                 "Dockerfile",
-                "Dockerfile-arm64"
+                "Dockerfile-arm64",
+                ".dockerignore"
         };
         Arrays.asList(fixList).forEach(f ->{
             try {
