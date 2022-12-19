@@ -36,28 +36,19 @@ jobs:
         arguments: buildPlugin
     #- name: check artifact
     #  run: ls build/distributions
-    - uses: echapmanFromBunnings/upload-release-assets@1.2
-      with:
-        releaseTag: 'v1.0.5'
-        githubToken: ${{ secrets.GITHUB_TOKEN }}
-        files: |
-           ./build/distributions/*
+    #- uses: echapmanFromBunnings/upload-release-assets@1.2
+    #  with:
+    #    releaseTag: 'v1.0.5'
+    #    githubToken: ${{ secrets.GITHUB_TOKEN }}
+    #    files: |
+    #       ./build/distributions/*
            
-  release:
-    runs-on: ubuntu-latest
-    needs: [build]
-    steps:
-    - uses: actions/checkout@master
-    - name: Create release
-      uses: Roang-zero1/github-create-release-action@v2
+    - uses: xresloader/upload-to-github-release@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    - name: Upload release artifacts
-      uses: Roang-zero1/github-upload-release-artifacts-action@v2
       with:
-        args: "./build/distributions/"
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+        file: "./build/distributions/*"
+        tags: false
+        draft: true
         
         
