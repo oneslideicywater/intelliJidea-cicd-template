@@ -27,12 +27,22 @@ public class Module {
         module.maintainers=ms;
         module.path= ".";
         module.env = new HashMap<>();
+        // trigger remote server build
+        module.easybuild = new EasyBuild();
+        module.easybuild.auth.user="admin";
+        module.easybuild.auth.token = "1101fad89b98995083388824f0f2ce140b";
+        module.easybuild.job.name = "<your job name>";
+        module.easybuild.jenkins.url = "http://172.16.66.37:30084";
+
 
         module.env.put("JOB_BASE_PATH", String.format("/jenkins/agent/workspace/%s_%s",ns,name));
         module.env.put("NODE_IMAGE", "registry.geoway.com/nodejs/node:14.20.0-buster-x86");
+        // add qy WeChat boot webhook
+        module.env.put("BOTHOOK","https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b3ff4739-f1d8-44ef-9f29-6eefbfca5796");
         // resource copy
         module.resources=new ArrayList<>();
         module.resources.add(ResourceItem.nodeJsDist());
+
 
         // stages
         module.stages =new ArrayList<>();
@@ -76,9 +86,25 @@ public class Module {
         module.maintainers=ms;
         module.path= ".";
         module.env = new HashMap<>();
-        module.env.put("ns",ns);
+        module.env.put("BOTHOOK","https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=b3ff4739-f1d8-44ef-9f29-6eefbfca5796");
         module.modules = new ArrayList<>();
 
+        // trigger remote server build
+//        jenkins: {
+//            url: "http://172.16.66.37:30084"
+//        },
+//        job: {
+//            name: "<your job name>"
+//        },
+//        auth: {
+//            user: "admin",
+//                    token: "1101fad89b98995083388824f0f2ce140b"
+//        }
+        module.easybuild = new EasyBuild();
+        module.easybuild.auth.user="admin";
+        module.easybuild.auth.token = "1101fad89b98995083388824f0f2ce140b";
+        module.easybuild.job.name = "<your job name>";
+        module.easybuild.jenkins.url = "http://172.16.66.37:30084";
 
         if (modules.length == 0 ){
             module.resources= ResourceItem.mavenResource();
@@ -86,13 +112,13 @@ public class Module {
             module.stages =new ArrayList<>();
             addStageHelper(module);
             module.stages.add(0, new Stage("build",new String[]{
-                    "mvn clean install -Dmaven.test.skip=true"}
+                    "mvn -B clean install -Dmaven.test.skip=true"}
                     ));
         } else{
             // stages
             module.stages =new ArrayList<>();
             module.stages.add(0, new Stage("build",new String[]{
-                    "mvn clean install -Dmaven.test.skip=true"}
+                    "mvn -B clean install -Dmaven.test.skip=true"}
             ));
             Arrays.asList(modules).forEach(m->{
                 Module mod = new Module();
